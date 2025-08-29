@@ -1,58 +1,132 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { MessageCircle, Instagram } from "lucide-react";
-import Link from "next/link";
+'use client';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { useLang } from '@/components/LangProvider';
+import Reveal from '@/components/Reveal';
+import Lightbox from '@/components/Lightbox';
 
 export default function Home() {
+  const { t } = useLang();
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // lightbox state for home preview
+  const [open, setOpen] = useState(false);
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    fetch('/api/ig')
+      .then((r) => r.json())
+      .then((d) => setItems(Array.isArray(d?.data) ? d.data : []))
+      .catch(() => setItems([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  // transform to lightbox items
+  const lbItems = (Array.isArray(items) ? items : []).map((it, i) => ({
+    src: it.media_url || `/ph-${(i % 6) + 1}.svg`,
+    alt: it.caption || 'IG photo',
+    href: it.permalink || '#',
+  }));
+
   return (
-    <main className="container-p space-y-16">
-      {/* ==== Hero Section ==== */}
-      <section className="relative rounded-3xl overflow-hidden shadow-lg">
-        {/* Background Logo */}
-        <img
-          src="/hero-art.jpg"
-          alt="New School Tattoo Hero"
-          className="w-full h-[300px] md:h-[400px] object-cover"
-        />
+    <>
+      <Navbar />
 
-        {/* Overlay content */}
-        <div className="absolute inset-0 flex flex-col items-start justify-center bg-black/20 p-6 sm:p-12">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white drop-shadow-lg">
-            NewSchool Tattoo
-          </h1>
-          <p className="mt-3 text-lg sm:text-xl text-white max-w-xl drop-shadow">
-            Перфектното място да реализирате идеите си за татуировки. 
-            Модерен стил, стерилна среда и индивидуален дизайн.
-          </p>
+      <main>
+        {/* HERO with logo art — fixed 60vh */}
+        <section className="container-p pt-6 sm:pt-8">
+          <Reveal y={24}>
+            <div className="relative overflow-hidden rounded-3xl shadow-glass h-[60vh]">
+              <Image
+                src="/hero-art.jpg"
+                alt="New School Tattoo background"
+                fill
+                priority
+                className="object-cover"
+                sizes="100vw"
+              />
+              {/* subtle overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-black/5 to-transparent" />
 
-          {/* Buttons */}
-          <div className="mt-6 flex gap-4">
-            {/* Messenger */}
-            <Button asChild className="bg-white/80 hover:bg-white text-black shadow-md">
-              <a
-                href="https://m.me/tattoostudionewschool"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle className="w-5 h-5 mr-2" />
-                Messenger
+{/* Buttons (Messenger + Instagram stacked) */}
+<div className="absolute left-3 top-3 sm:left-6 sm:top-6 flex flex-col gap-3 w-[180px]">
+  {/* Messenger */}
+  <a
+    className="btn-glass text-sm sm:text-base text-center"
+    href="https://m.me/61566511874040"
+    target="_blank"
+    rel="noreferrer"
+  >
+    💬 {t('home.hero.ctaMessenger')}
+  </a>
+
+  {/* Instagram Chat (solid orange) */}
+  <a
+    className="text-sm sm:text-base text-center rounded-xl px-4 py-2 font-medium shadow-md bg-orange-500 text-white hover:bg-orange-600 transition"
+    href="https://www.instagram.com/newschooltattoo/"
+    target="_blank"
+    rel="noreferrer"
+  >
+    📸 Instagram Chat
+  </a>
+</div>
+
+            </div>
+          </Reveal>
+        </section>
+
+        {/* GALLERY PREVIEW */}
+        <section className="container-p mt-10 sm:mt-14 lg:mt-16" id="home-gallery">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+            <Reveal><h2 className="text-2xl sm:text-3xl font-semibold">{t('home.galleryTitle')}</h2></Reveal>
+            <Reveal delay={0.05}>
+              <a className="btn-glass self-start sm:self-auto" href="/gallery">
+                {t('home.openGallery')}
               </a>
-            </Button>
-
-            {/* Instagram */}
-            <Button asChild className="bg-pink-500 hover:bg-pink-600 text-white shadow-md">
-              <a
-                href="https://ig.me/m/new.school.tattoo.silistra"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram className="w-5 h-5 mr-2" />
-                Instagram Chat
-              </a>
-            </Button>
+            </Reveal>
           </div>
-        </div>
-      </section>
-    </main>
+
+          {loading ? (
+            <Reveal delay={0.1}><div className="mt-6 opacity-70">{t('home.loading')}</div></Reveal>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 mt-6">
+              {(Array.isArray(items) ? items : []).slice(0, 10).map((it, i) => (
+                <Reveal key={it.id || i} delay={0.02 * i}>
+                  <button
+                    onClick={() => { setIdx(i); setOpen(true); }}
+                    className="glass rounded-2xl sm:rounded-3xl overflow-hidden w-full text-left"
+                    aria-label="Open photo"
+                  >
+                    <div className="aspect-square">
+                      <Image
+                        src={it.media_url || `/ph-${(i % 6) + 1}.svg`}
+                        alt={it.caption || 'IG'}
+                        fill
+                        sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, (max-width:1536px) 25vw, 20vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  </button>
+                </Reveal>
+              ))}
+            </div>
+          )}
+        </section>
+      </main>
+
+      <Footer />
+
+      {open && (
+        <Lightbox
+          items={lbItems}
+          index={idx}
+          onClose={() => setOpen(false)}
+          setIndex={setIdx}
+        />
+      )}
+    </>
   );
 }

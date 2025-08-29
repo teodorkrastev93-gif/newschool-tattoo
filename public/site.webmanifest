@@ -1,0 +1,25 @@
+{
+    "name": "NewSchool Tattoo",
+    "short_name": "NSTattoo",
+    "description": "Modern new-school tattoo studio in Silistra. Sterile, creative, custom designs.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#F7F3EA",
+    "theme_color": "#EDE0CC",
+    "icons": [
+      {
+        "src": "/android-chrome-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/android-chrome-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ]
+  }
+  

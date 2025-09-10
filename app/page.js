@@ -68,7 +68,7 @@ export default function Home() {
                 {/* Instagram Chat */}
                 <a
                   className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-2 rounded-xl font-medium shadow-md bg-orange-500 text-white hover:bg-orange-600 transition"
-                  href="https://www.instagram.com/new.school.tattoo.silistra"
+                  href="https://www.instagram.com/new.school.tattoo.silistra/"
                   target="_blank"
                   rel="noreferrer"
                 >

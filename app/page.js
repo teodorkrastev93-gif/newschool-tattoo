@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import { useLang } from '@/components/LangProvider';
 import Reveal from '@/components/Reveal';
 import Lightbox from '@/components/Lightbox';
+import { MessageCircle, Instagram } from 'lucide-react';
 
 export default function Home() {
   const { t } = useLang();
@@ -51,29 +52,30 @@ export default function Home() {
               {/* subtle overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-black/5 to-transparent" />
 
-{/* Buttons (Messenger + Instagram stacked) */}
-<div className="absolute left-3 top-3 sm:left-6 sm:top-6 flex flex-col gap-3 w-[180px]">
-  {/* Messenger */}
-  <a
-    className="btn-glass text-sm sm:text-base text-center"
-    href="https://m.me/61566511874040"
-    target="_blank"
-    rel="noreferrer"
-  >
-    💬 {t('home.hero.ctaMessenger')}
-  </a>
+              {/* Buttons (top-left, stacked) */}
+              <div className="absolute left-3 top-3 sm:left-6 sm:top-6 flex flex-col gap-2 w-[190px]">
+                {/* Messenger */}
+                <a
+                  className="btn-glass flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-2 rounded-xl"
+                  href="https://m.me/61566511874040"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  {t('home.hero.ctaMessenger')}
+                </a>
 
-  {/* Instagram Chat (solid orange) */}
-  <a
-    className="text-sm sm:text-base text-center rounded-xl px-4 py-2 font-medium shadow-md bg-orange-500 text-white hover:bg-orange-600 transition"
-    href="https://www.instagram.com/newschooltattoo/"
-    target="_blank"
-    rel="noreferrer"
-  >
-    📸 Instagram Chat
-  </a>
-</div>
-
+                {/* Instagram Chat */}
+                <a
+                  className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-2 rounded-xl font-medium shadow-md bg-orange-500 text-white hover:bg-orange-600 transition"
+                  href="https://www.instagram.com/new.school.tattoo.silistra"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Instagram className="w-4 h-4" />
+                  Instagram Chat
+                </a>
+              </div>
             </div>
           </Reveal>
         </section>

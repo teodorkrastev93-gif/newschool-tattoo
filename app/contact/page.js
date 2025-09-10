@@ -1,98 +1,81 @@
 'use client';
 import { useLang } from '@/components/LangProvider';
-import { MessageCircle, Instagram, Mail } from 'lucide-react';
 
-export default function Contact() {
+export default function ContactPage() {
   const { t } = useLang();
 
   return (
-    <div className="container-p py-12 space-y-8">
-      <h1 className="text-3xl font-bold">{t('nav.contact')}</h1>
+    <main className="container-p py-12 sm:py-16 lg:py-20">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-8">{t('contact.title')}</h1>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Address */}
-        <div className="glass p-6 rounded-2xl shadow">
-          <h2 className="text-xl font-semibold">{t('contact.address')}</h2>
-          <p>
+        <div className="glass p-6 rounded-2xl shadow-lg">
+          <h2 className="text-xl font-semibold mb-2">{t('contact.addressTitle')}</h2>
+          <p className="mb-4">
             Силистра Център, ул. „Бояджи Яни“ 6,
-            <br /> 7500 Силистра, България
+            <br />
+            7500 Силистра, България
           </p>
           <a
-            href="https://maps.google.com/?q=7500+Silistra+Bulgaria"
+            href="https://www.google.com/maps?q=Silistra,+Boyadzhi+Yani+6"
             target="_blank"
-            rel="noopener noreferrer"
-            className="btn-glass mt-4 inline-block"
+            rel="noreferrer"
+            className="btn-glass"
           >
-            {t('contact.openMaps')}
+            {t('contact.openMap')}
           </a>
         </div>
 
         {/* Phone & Email */}
-        <div className="glass p-6 rounded-2xl shadow">
-          <h2 className="text-xl font-semibold">{t('contact.phoneEmail')}</h2>
-          <p>
-            Телефон:{' '}
-            <a href="tel:+359896478701" className="underline">
-              +359896478701
-            </a>
+        <div className="glass p-6 rounded-2xl shadow-lg">
+          <h2 className="text-xl font-semibold mb-2">{t('contact.phoneEmailTitle')}</h2>
+          <p className="mb-2">
+            Телефон: <a href="tel:+359896478701" className="underline">+359 896 478 701</a>
           </p>
-          <p>
-            Имейл:{' '}
-            <a
-              href="mailto:tattoostudioschool@gmail.com"
-              className="underline"
-            >
-              tattoostudioschool@gmail.com
-            </a>
+          <p className="mb-4">
+            Имейл: <a href="mailto:tattoostudioschool@gmail.com" className="underline">tattoostudioschool@gmail.com</a>
           </p>
-
-          <div className="flex flex-col gap-2 mt-4 w-[190px]">
-            {/* Messenger */}
+          <div className="flex flex-col gap-3">
             <a
               href="https://m.me/61566511874040"
               target="_blank"
-              rel="noopener noreferrer"
-              className="btn-glass flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-2 rounded-xl"
+              rel="noreferrer"
+              className="btn-glass"
             >
-              <MessageCircle className="w-4 h-4" />
-              {t('contact.sendMessage')} Messenger
+              💬 {t('contact.messenger')}
             </a>
-
-            {/* Instagram Chat */}
             <a
               href="https://www.instagram.com/new.school.tattoo.silistra"
               target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-2 rounded-xl font-medium shadow-md bg-orange-500 text-white hover:bg-orange-600 transition"
+              rel="noreferrer"
+              className="btn-instagram"
             >
-              <Instagram className="w-4 h-4" />
-              Instagram Chat
+              📷 {t('contact.instagramChat')}
             </a>
-
-            {/* Email */}
             <a
               href="mailto:tattoostudioschool@gmail.com"
-              className="btn-glass flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-2 rounded-xl"
+              className="btn-glass"
             >
-              <Mail className="w-4 h-4" />
-              {t('contact.sendEmail')}
+              ✉️ {t('contact.email')}
             </a>
           </div>
         </div>
 
-        {/* Instagram profile link */}
-        <div className="glass p-6 rounded-2xl shadow">
-          <h2 className="text-xl font-semibold">{t('contact.instagram')}</h2>
+        {/* Instagram Profile */}
+        <div className="glass p-6 rounded-2xl shadow-lg">
+          <h2 className="text-xl font-semibold mb-2">{t('contact.instagramTitle')}</h2>
+          <p className="mb-4">{t('contact.instagramDesc')}</p>
           <a
             href="https://www.instagram.com/new.school.tattoo.silistra"
             target="_blank"
-            rel="noopener noreferrer"
-            className="btn-glass mt-4 inline-block"
+            rel="noreferrer"
+            className="btn-glass"
           >
             {t('contact.openInstagram')}
           </a>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

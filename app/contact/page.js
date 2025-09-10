@@ -1,24 +1,25 @@
 'use client';
+import React from 'react';
 import { useLang } from '@/components/LangProvider';
 
 export default function ContactPage() {
   const { t } = useLang();
 
   return (
-    <main className="container-p py-12 sm:py-16 lg:py-20">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-8">{t('contact.title')}</h1>
+    <main className="container-p mt-10 sm:mt-14 lg:mt-16">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-8">
+        {t('contact.title')}
+      </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-6">
         {/* Address */}
-        <div className="glass p-6 rounded-2xl shadow-lg">
-          <h2 className="text-xl font-semibold mb-2">{t('contact.addressTitle')}</h2>
-          <p className="mb-4">
-            Силистра Център, ул. „Бояджи Яни“ 6,
-            <br />
-            7500 Силистра, България
-          </p>
+        <div className="glass p-6 rounded-2xl shadow-md">
+          <h2 className="text-lg font-semibold mb-3">
+            {t('contact.addressTitle')}
+          </h2>
+          <p className="mb-4">{t('contact.address')}</p>
           <a
-            href="https://www.google.com/maps?q=Silistra,+Boyadzhi+Yani+6"
+            href="https://maps.app.goo.gl/om57zhsr1xPtF1JA9"
             target="_blank"
             rel="noreferrer"
             className="btn-glass"
@@ -27,47 +28,61 @@ export default function ContactPage() {
           </a>
         </div>
 
-        {/* Phone & Email */}
-        <div className="glass p-6 rounded-2xl shadow-lg">
-          <h2 className="text-xl font-semibold mb-2">{t('contact.phoneEmailTitle')}</h2>
-          <p className="mb-2">
-            Телефон: <a href="tel:+359896478701" className="underline">+359 896 478 701</a>
+        {/* Phone + Email */}
+        <div className="glass p-6 rounded-2xl shadow-md">
+          <h2 className="text-lg font-semibold mb-3">
+            {t('contact.phoneEmailTitle')}
+          </h2>
+          <p className="mb-1">
+            <strong>{t('contact.phone')}:</strong>{' '}
+            <a href="tel:+359896478701" className="hover:underline">
+              +359896478701
+            </a>
           </p>
           <p className="mb-4">
-            Имейл: <a href="mailto:tattoostudioschool@gmail.com" className="underline">tattoostudioschool@gmail.com</a>
+            <strong>{t('contact.email')}:</strong>{' '}
+            <a
+              href="mailto:tattoostudioschool@gmail.com"
+              className="hover:underline"
+            >
+              tattoostudioschool@gmail.com
+            </a>
           </p>
           <div className="flex flex-col gap-3">
             <a
+              className="btn-glass"
               href="https://m.me/61566511874040"
               target="_blank"
               rel="noreferrer"
-              className="btn-glass"
             >
-              💬 {t('contact.messenger')}
+              💬 Messenger
             </a>
             <a
-              href="https://www.instagram.com/new.school.tattoo.silistra"
+              className="btn-glass bg-orange-500 text-white hover:bg-orange-600"
+              href="https://www.instagram.com/new.school.tattoo.silistra?igsh=djV4czkzbjg4ZG1h"
               target="_blank"
               rel="noreferrer"
-              className="btn-instagram"
             >
-              📷 {t('contact.instagramChat')}
+              📸 Instagram Chat
             </a>
             <a
-              href="mailto:tattoostudioschool@gmail.com"
               className="btn-glass"
+              href="mailto:tattoostudioschool@gmail.com"
+              target="_blank"
+              rel="noreferrer"
             >
-              ✉️ {t('contact.email')}
+              ✉️ {t('contact.sendEmail')}
             </a>
           </div>
         </div>
 
-        {/* Instagram Profile */}
-        <div className="glass p-6 rounded-2xl shadow-lg">
-          <h2 className="text-xl font-semibold mb-2">{t('contact.instagramTitle')}</h2>
-          <p className="mb-4">{t('contact.instagramDesc')}</p>
+        {/* Instagram */}
+        <div className="glass p-6 rounded-2xl shadow-md">
+          <h2 className="text-lg font-semibold mb-3">
+            {t('contact.instagramTitle')}
+          </h2>
           <a
-            href="https://www.instagram.com/new.school.tattoo.silistra"
+            href="https://www.instagram.com/new.school.tattoo.silistra?igsh=djV4czkzbjg4ZG1h"
             target="_blank"
             rel="noreferrer"
             className="btn-glass"

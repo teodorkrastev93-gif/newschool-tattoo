@@ -3,7 +3,7 @@ export async function GET() {
       `User-agent: *
   Allow: /
   
-  Sitemap: https://newschooltattoo.com/sitemap.xml
+  Sitemap: hhttps://newschool-tattoo.vercel.app/sitemap.xml
   `,
       {
         headers: {

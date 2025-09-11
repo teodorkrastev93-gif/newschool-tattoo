@@ -6,9 +6,11 @@ import Footer from '@/components/Footer';
 import { useLang } from '@/components/LangProvider';
 import Reveal from '@/components/Reveal';
 import Lightbox from '@/components/Lightbox';
+import { Instagram } from 'lucide-react'; // Fix: Import Instagram icon
 
 export default function Home() {
   const { t } = useLang();
+  const translate = (key) => t(key) || key; // Fix: Add fallback for translation keys
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +20,10 @@ export default function Home() {
 
   useEffect(() => {
     fetch('/api/ig')
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error('Failed to fetch'); // Fix: Handle fetch errors
+        return r.json();
+      })
       .then((d) => setItems(Array.isArray(d?.data) ? d.data : []))
       .catch(() => setItems([]))
       .finally(() => setLoading(false));
@@ -51,17 +56,17 @@ export default function Home() {
               {/* subtle overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-black/5 to-transparent" />
 
-{/* Buttons (Messenger + Instagram stacked) */}
-<div className="absolute left-3 top-3 sm:left-6 sm:top-6 flex flex-col gap-3 w-[180px]">
-  {/* Messenger */}
-  <a
-    className="btn-glass text-sm sm:text-base text-center"
-    href="https://m.me/61566511874040"
-    target="_blank"
-    rel="noreferrer"
-  >
-    💬 {t('home.hero.ctaMessenger')}
-  </a>
+              {/* Buttons (Messenger + Instagram stacked) */}
+              <div className="absolute left-3 top-3 sm:left-6 sm:top-6 flex flex-col gap-3 w-[180px]">
+                {/* Messenger */}
+                <a
+                  className="btn-glass text-sm sm:text-base text-center"
+                  href="https://m.me/61566511874040"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  💬 {translate('home.hero.ctaMessenger')}
+                </a>
 
                 {/* Instagram Chat */}
                 <a
@@ -81,24 +86,33 @@ export default function Home() {
         {/* GALLERY PREVIEW */}
         <section className="container-p mt-10 sm:mt-14 lg:mt-16" id="home-gallery">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
-            <Reveal><h2 className="text-2xl sm:text-3xl font-semibold">{t('home.galleryTitle')}</h2></Reveal>
+            <Reveal>
+              <h2 className="text-2xl sm:text-3xl font-semibold">
+                {translate('home.galleryTitle')}
+              </h2>
+            </Reveal>
             <Reveal delay={0.05}>
               <a className="btn-glass self-start sm:self-auto" href="/gallery">
-                {t('home.openGallery')}
+                {translate('home.openGallery')}
               </a>
             </Reveal>
           </div>
 
           {loading ? (
-            <Reveal delay={0.1}><div className="mt-6 opacity-70">{t('home.loading')}</div></Reveal>
+            <Reveal delay={0.1}>
+              <div className="mt-6 opacity-70">{translate('home.loading')}</div>
+            </Reveal>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 mt-6">
               {(Array.isArray(items) ? items : []).slice(0, 10).map((it, i) => (
                 <Reveal key={it.id || i} delay={0.02 * i}>
                   <button
-                    onClick={() => { setIdx(i); setOpen(true); }}
+                    onClick={() => {
+                      setIdx(i);
+                      setOpen(true);
+                    }}
                     className="glass rounded-2xl sm:rounded-3xl overflow-hidden w-full text-left"
-                    aria-label="Open photo"
+                    aria-label={`Open photo ${it.caption || `#${i + 1}`}`} // Fix: Improved aria-label
                   >
                     <div className="aspect-square">
                       <Image

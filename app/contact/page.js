@@ -1,96 +1,89 @@
 'use client';
 import React from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import { useLang } from '@/components/LangProvider';
 
-export default function ContactPage() {
+export default function Contact() {
   const { t } = useLang();
 
   return (
-    <main className="container-p mt-10 sm:mt-14 lg:mt-16">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-8">
-        {t('contact.title')}
-      </h1>
+    <>
+      <Navbar />
+      <main className="container-p mt-8 sm:mt-10">
+        <h1 className="text-2xl sm:text-3xl font-semibold">{t('contact.title')}</h1>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        {/* Address */}
-        <div className="glass p-6 rounded-2xl shadow-md">
-          <h2 className="text-lg font-semibold mb-3">
-            {t('contact.addressTitle')}
-          </h2>
-          <p className="mb-4">{t('contact.address')}</p>
-          <a
-            href="https://maps.app.goo.gl/om57zhsr1xPtF1JA9"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-glass"
-          >
-            {t('contact.openMap')}
-          </a>
-        </div>
+        <div className="grid gap-4 sm:gap-6 mt-6 md:grid-cols-2 lg:grid-cols-3">
+          {/* Address */}
+          <div className="glass rounded-2xl sm:rounded-3xl p-5 sm:p-6">
+            <h3 className="text-lg font-medium">{t('contact.addressTitle')}</h3>
+            <p className="mt-2 opacity-80 text-sm sm:text-base">{t('contact.addressText')}</p>
+            <a
+              className="btn-glass mt-4 inline-flex"
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.google.com/maps/search/?api=1&query=Silistra%20Center%2C%20ul.%20Boyadzhi%20Yani%206%2C%207500%20Silistra%2C%20Bulgaria"
+            >
+              {t('contact.openMaps')}
+            </a>
+          </div>
 
-        {/* Phone + Email */}
-        <div className="glass p-6 rounded-2xl shadow-md">
-          <h2 className="text-lg font-semibold mb-3">
-            {t('contact.phoneEmailTitle')}
-          </h2>
-          <p className="mb-1">
-            <strong>{t('contact.phone')}:</strong>{' '}
-            <a href="tel:+359896478701" className="hover:underline">
-              +359896478701
-            </a>
-          </p>
-          <p className="mb-4">
-            <strong>{t('contact.email')}:</strong>{' '}
+          {/* Phone + Email */}
+          <div className="glass rounded-2xl sm:rounded-3xl p-5 sm:p-6">
+            <h3 className="text-lg font-medium">{t('contact.phoneEmailTitle')}</h3>
+            <div className="mt-2 text-sm sm:text-base">
+              <div>
+                {t('contact.phoneLabel')}:{" "}
+                <a className="underline" href="tel:+359896478701">+359896478701</a>
+              </div>
+              <div>
+                {t('contact.emailLabel')}:{" "}
+                <a className="underline" href="mailto:tattoostudionewschool@gmail.com">
+                  tattoostudionewschool@gmail.com
+                </a>
+              </div>
+            </div>
+            <div className="mt-4 flex gap-3">
+              <a
+                className="btn-glass"
+                href="https://m.me/61566511874040"
+                target="_blank"
+                rel="noreferrer"
+              >
+                💬 {t('contact.btnMessenger')}
+              </a>
+              <a className="btn-glass" href="mailto:tattoostudionewschool@gmail.com">
+                ✉️ {t('contact.btnEmail')}
+              </a>
+            </div>
+          </div>
+
+          {/* Instagram */}
+          <div className="glass rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col items-center text-center">
+            <h3 className="text-lg font-medium">{t('contact.instagramTitle')}</h3>
             <a
-              href="mailto:tattoostudioschool@gmail.com"
-              className="hover:underline"
-            >
-              tattoostudioschool@gmail.com
-            </a>
-          </p>
-          <div className="flex flex-col gap-3">
-            <a
-              className="btn-glass"
-              href="https://m.me/61566511874040"
+              className="btn-glass mt-5 inline-flex"
+              href="https://www.instagram.com/new.school.tattoo.silistra/"
               target="_blank"
               rel="noreferrer"
             >
-              💬 Messenger
-            </a>
-            <a
-              className="btn-glass bg-orange-500 text-white hover:bg-orange-600"
-              href="https://www.instagram.com/new.school.tattoo.silistra?igsh=djV4czkzbjg4ZG1h"
-              target="_blank"
-              rel="noreferrer"
-            >
-              📸 Instagram Chat
-            </a>
-            <a
-              className="btn-glass"
-              href="mailto:tattoostudioschool@gmail.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              ✉️ {t('contact.sendEmail')}
+              {t('contact.openInstagram')}
             </a>
           </div>
         </div>
 
-        {/* Instagram */}
-        <div className="glass p-6 rounded-2xl shadow-md">
-          <h2 className="text-lg font-semibold mb-3">
-            {t('contact.instagramTitle')}
-          </h2>
-          <a
-            href="https://www.instagram.com/new.school.tattoo.silistra?igsh=djV4czkzbjg4ZG1h"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-glass"
-          >
-            {t('contact.openInstagram')}
-          </a>
+        {/* Map (responsive height) */}
+        <div className="glass rounded-2xl sm:rounded-3xl p-1 sm:p-2 mt-6 sm:mt-8 overflow-hidden">
+          <iframe
+            title="Map"
+            className="w-full h-[280px] sm:h-[340px] lg:h-[380px]"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?width=100%25&height=360&hl=en&q=Silistra%20Center,%20ul.%20Boyadzhi%20Yani%206,%207500%20Silistra,%20Bulgaria&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+          />
         </div>
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }

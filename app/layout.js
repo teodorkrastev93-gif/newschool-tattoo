@@ -4,15 +4,31 @@ import BackToTop from '@/components/backToTop';
 
 export const metadata = {
   metadataBase: new URL("https://newschool-tattoo.vercel.app"),
-  title: "New School Tattoo – Студио за татуировки в Силистра",
+  title: "New School Tattoo – Силистра",
   description:
-    "Професионално студио за татуировки в Силистра, България. Модерен стил, креативност и стерилна хигиена. Fine line, реализъм и цветни татуировки.",
+    "⏰Запиши час още сега!⏰ 💬Пиши ни за Безплатна консултация! 💬",
   keywords: [
     "tattoo studio Silistra",
     "татуировки Силистра",
     "студио за татуировки",
     "New School Tattoo",
-    "татуировка България"
+    "tattoo Silistra",
+    "tattoo studio",
+    "тату студио",
+    "татуировка Силистра",
+    "татуист Силистра",
+    "тату Силистра",
+    "tattoo artist Silistra",
+    "Силистра",
+    "татуировки",
+    "татуировка",
+    "тату",
+    "татуист",
+    "татусалони",
+    "татуировки цени",
+    "татуировки снимки",
+    "татуировки идеи",
+    "татуировки мъже",
   ],
   icons: {
     icon: [
@@ -31,9 +47,9 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "https://newschool-tattoo.vercel.app",
-    title: "New School Tattoo – Tattoo Studio Silistra",
+    title: "New School Tattoo – Силистра",
     description:
-      "Professional tattoo studio in Silistra, Bulgaria. Unique designs, sterile environment, consultations and aftercare.",
+      "⏰ Запиши час още сега⏰ 💬 Пиши ни за Безплатна консултация! 💬",
     siteName: "New School Tattoo",
     images: [
       {
@@ -46,15 +62,14 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "New School Tattoo – Tattoo Studio Silistra",
-    description: "Professional tattoo studio in Silistra, Bulgaria.",
+    title: "New School Tattoo – Силистра",
+    description: "⏰ Запиши час още сега⏰ 💬 Пиши ни за Безплатна консултация💬",
     images: ["/og-image.jpg"],
   },
   alternates: {
     canonical: "https://newschool-tattoo.vercel.app",
   },
 };
-
 
 export default function RootLayout({ children }) {
   return (
